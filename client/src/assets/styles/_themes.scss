@@ -1,6 +1,6 @@
 .btn {
   padding: 5px 15px;
-  border-radius: 20px;
+  border-radius: var(--border-radius);
   cursor: pointer;
   transition: 0.2s opacity;
   &:hover {
@@ -21,7 +21,7 @@
 }
 
 .card {
-  border-radius: 20px;
+  border-radius: var(--border-radius);
   background-color: white;
 }
 
@@ -38,7 +38,7 @@ label {
 input {
   padding: 10px 15px;
   border: 2px solid var(--gray-2);
-  border-radius: 20px;
+  border-radius: var(--border-radius);
 }
 
 .form-error {
