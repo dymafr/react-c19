@@ -1,5 +1,5 @@
-function Singup() {
-    return <h1>Singup</h1>;
-  }
-  
-  export default Singup;
+function Signup() {
+  return <h1>Signup</h1>;
+}
+
+export default Signup;
