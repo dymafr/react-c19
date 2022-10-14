@@ -2,7 +2,7 @@ const UserModel = require('../../database/models/user.model');
 const bcrypt = require('bcrypt');
 const router = require('express').Router();
 const jsonwebtoken = require('jsonwebtoken');
-const { key } = require('../../keys');
+const { key, keyPub } = require('../../keys');
 
 router.post('/', async (req, res) => {
   const { email, password } = req.body;
@@ -28,3 +28,27 @@ router.post('/', async (req, res) => {
     res.status(400).json('Mauvais email/password');
   }
 });
+
+router.get('/current', async (req, res) => {
+  const { token } = req.cookies;
+  if (token) {
+    try {
+      const decodedToken = jsonwebtoken.verify(token, keyPub);
+      const currentUser = await UserModel.findById(decodedToken.sub)
+        .select('-password -__v')
+        .exec();
+      if (currentUser) {
+        return res.json(currentUser);
+      } else {
+        return res.json(null);
+      }
+    } catch (e) {
+      console.log(e);
+      return res.json(null);
+    }
+  } else {
+    return res.json(null);
+  }
+});
+
+module.exports = router;
