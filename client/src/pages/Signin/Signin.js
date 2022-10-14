@@ -2,9 +2,12 @@ import styles from './Signin.module.scss';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { signin } from '../../apis/auth';
+import { useContext } from 'react';
+import { AuthContext } from '../../context';
 
 function Signin() {
+  const { signin } = useContext(AuthContext);
+
   const validationSchema = yup.object({
     email: yup
       .string()
