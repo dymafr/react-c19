@@ -92,4 +92,3 @@ function Signin() {
 }
 
 export default Signin;
-Footer;

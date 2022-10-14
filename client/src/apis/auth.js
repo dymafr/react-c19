@@ -24,3 +24,9 @@ export async function getCurrentUser() {
   const response = await fetch(`${API_AUTH}/current`);
   return response.json();
 }
+
+export async function signout() {
+  await fetch(API_AUTH, {
+    method: 'DELETE',
+  });
+}
