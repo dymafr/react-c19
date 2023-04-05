@@ -10,18 +10,18 @@ router.post('/', async (req, res) => {
     email,
     password: await bcrypt.hash(password, 8),
   });
-  newUser.save((err, user) => {
-    if (err) {
-      console.log(err);
-      if (err.code === 11000) {
-        res.status(400).json('Email déjà utilisé');
-      } else {
-        res.status(400).json('Oops une erreur est survenue');
-      }
+
+  try {
+    const user = await newUser.save();
+    res.json(user);
+  } catch (err) {
+    console.log(err);
+    if (err.code === 11000) {
+      res.status(400).json('Email déjà utilisé');
     } else {
-      res.json(user);
+      res.status(400).json('Oops une erreur est survenue');
     }
-  });
+  }
 });
 
 module.exports = router;
